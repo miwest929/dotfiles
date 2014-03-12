@@ -170,9 +170,9 @@ fi
 export HADOOP_MAPRED_HOME=/Users/mwest/paas-source/hadoop-2.3.0
 export YARN_CONF_DIR=/Users/mwest/paas-source/hadoop-2.3.0
 
-export AWS_ACCESS_KEY="AKIAIFJXFVITW22UIOPA"
-export AWS_ACCESS_KEY_ID="AKIAIFJXFVITW22UIOPA"
-export AWS_SECRET_KEY="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"
+export AWS_ACCESS_KEY="ENTER-AWS-ACCESS-KEY-HERE"
+export AWS_ACCESS_KEY_ID="ENTER-ACCESS-KEY-ID-HERE"
+export AWS_SECRET_KEY="ENTER-AWS-SECRET-KEY-HERE"
 export AWS_CREDENTIAL_FILE="/Users/mwest/paas-source/creds/credential-file-path.green"
 export JAVA_HOME="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home"
 export PATH=$PATH:$JAVA_HOME/bin 
