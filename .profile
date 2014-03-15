@@ -4,6 +4,7 @@ function gvim { /Applications/MacVim.app/Contents/MacOS/Vim -g $*; }
 
 PS1="\[\e[1;34m\]\w\[\e[m\]\[\e[1;36m\] [\$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')]\[\e[0m\] $ "
 
+alias diskbench='time dd if=/dev/zero of=dummy_file bs=512k count=200'
 alias words='/usr/share/dict/words'
 alias strace='dtruss'
 alias todo='cd ~/Documents/todo'
