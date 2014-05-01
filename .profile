@@ -158,7 +158,7 @@ tagrelease() {
   git merge develop
   git tag $1
   git push origin master
-  git push with --tags
+  git push --tags
 }
 
 source ~/git-completion.bash
@@ -167,7 +167,6 @@ if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
 fi
 
-#Console password = E.oSI8LJFm
 export HADOOP_MAPRED_HOME=/Users/mwest/paas-source/hadoop-2.3.0
 export YARN_CONF_DIR=/Users/mwest/paas-source/hadoop-2.3.0
 
