@@ -17,6 +17,7 @@ PS1="\[\e[1;34m\]\w\[\e[m\]\[\e[1;36m\] [\$(git branch 2>/dev/null | sed -n '/^\
 # pg_dump -h dalton-sandbox-7e06d098.cz4lsbnwubdn.us-east-1.rds.amazonaws.com -U daltonc907ab3b Dalton_sandbox | psql dalton_sandbox
 
 #cd /mnt/blueprint/current && source 12factor-env.sh && bundle exec ./script/rails c
+alias ls='ls -G' # colorize the output
 alias g++='g++-4.8'
 alias fakeftp='python -m SimpleHTTPServer'
 alias externip='curl ifconfig.me'
