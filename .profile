@@ -1,9 +1,31 @@
-function gvim { /Applications/MacVim.app/Contents/MacOS/Vim -g $*; }
+# For future reference. In case I ever need to start from square one. Here is a list of my brew taps
+#~/paas-source [master] $ brew list
+#apple-gcc42   erlang      imagemagick   libmpc08    node      readline    tmux      zookeeper
+#autoconf    freetype    isl011      libpng      nspr      redis     tree
+#automake    gcc48     jpeg      libtool     openssl     rethinkdb   unixodbc
+#boot2docker   git     leiningen   libyaml     ossp-uuid   sbt     v8
+#cloog018    gmp4      libevent    mercurial   pcre      scala     wget
+#couchdb     gsl     libgpg-error    mpfr2     pig     spidermonkey    wxmac
+#docker      icu4c     libksba     mysql     pkg-config    the_silver_searcher xz
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+function gvim { /Applications/MacVim.app/Contents/MacOS/Vim -g $*; }
 
 PS1="\[\e[1;34m\]\w\[\e[m\]\[\e[1;36m\] [\$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')]\[\e[0m\] $ "
 
+# Example pg_dump command
+# pg_dump -h dalton-sandbox-7e06d098.cz4lsbnwubdn.us-east-1.rds.amazonaws.com -U daltonc907ab3b Dalton_sandbox | psql dalton_sandbox
+
+#cd /mnt/blueprint/current && source 12factor-env.sh && bundle exec ./script/rails c
+alias g++='g++-4.8'
+alias fakeftp='python -m SimpleHTTPServer'
+alias externip='curl ifconfig.me'
+alias m='cd ~/paas-source/maudit'
+alias mc="cd ~/paas-source/maudit_client"
+alias supervisor='supervisorctl'
+alias fixbundler='gem update --system && gem install bundler'
+alias innodb='PGPASSWORD=Hp2198hcv psql -U mwest -h maudit-innovate-5f84a522.cbkymcm2irfk.us-east-1.rds.amazonaws.com maudit_innovate'
+alias pg='postgres -D /usr/local/var/postgres'
 alias diskbench='time dd if=/dev/zero of=dummy_file bs=512k count=200'
 alias words='/usr/share/dict/words'
 alias strace='dtruss'
@@ -30,7 +52,11 @@ alias bundledebug='DEBUG_RESOLVER=true bundle install -VV'
 alias paas='cd ~/paas-source'
 alias gemsetdir='rvm gemset dir'
 alias redisping='redis-cli ping'
-alias jenkins='ssh mwest@ec2-54-234-196-12.compute-1.amazonaws.com'
+alias diffstash='git stash show -p stash@{0}'
+
+# cd /mnt/jenkins/jobs/
+alias jenkins='ssh tps-sqa-jenkins.imedidata.net'
+
 alias gitgc='git gc'
 alias giti="git clean -X $1"
 alias gitino='git clean -n -X'
@@ -58,6 +84,13 @@ alias rs='bundle exec rspec'
 #alias cu='zeus cucumber features'
 alias code='cd $CODE_PATH'
 alias githist="history | grep \"  git \" | awk '{print $1 \" \" $3}' | grep -v '|' > history.txt"
+
+alias idistro='innotop -u imedidataa1192a -p9504b2d048593e2e1ca46c2e6cf60217 -h imedidata-distro-46256681.cz4lsbnwubdn.us-east-1.rds.amazonaws.com'
+
+function dockerclean() {
+  docker ps -a | grep "Exited" | awk '{print $1}' | xargs docker rm
+  docker images | grep "<none>" | awk '{print $3}' | xargs docker rmi
+}
 
 function ctodo() {
   touch ~/Documents/todo/`date +"%m-%d-%y"`.todo.txt
@@ -108,6 +141,14 @@ function gh() {
   open $giturl
 }
 
+function gi() {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git status
+  fi
+}
+
 function pull() {
   branch="$(git symbolic-ref HEAD 2>/dev/null)"
   branch=${branch##refs/heads/}
@@ -130,6 +171,11 @@ sdb() {
   hash=$(echo -ne $payload | openssl dgst -sha256 -hmac "$AWS_SECRET_KEY" -binary | base64)
   echo $hash
   curl "http://sdb.us-east-1.amazonaws.com/?$params&Signature=$hash"
+}
+
+netrestart() {
+  sudo ifconfig en0 down
+  sudo ifconfig en0 up
 }
 
 tcptune() {
@@ -167,15 +213,17 @@ if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
 fi
 
+# Get rid of the annoying 'You have new mail in /var/mail' message
+unset MAILCHECK
+
 #Console password = E.oSI8LJFm
 export HADOOP_MAPRED_HOME=/Users/mwest/paas-source/hadoop-2.3.0
 export YARN_CONF_DIR=/Users/mwest/paas-source/hadoop-2.3.0
 
-export AWS_ACCESS_KEY="ENTER-AWS-ACCESS-KEY-HERE"
-export AWS_ACCESS_KEY_ID="ENTER-ACCESS-KEY-ID-HERE"
-export AWS_SECRET_KEY="ENTER-AWS-SECRET-KEY-HERE"
+export AWS_ACCESS_KEY_ID="AKIAIVSWJ62JWKWBPREA"
+export AWS_SECRET_KEY="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"
 export AWS_CREDENTIAL_FILE="/Users/mwest/paas-source/creds/credential-file-path.green"
-export JAVA_HOME="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home"
 export PATH=$PATH:$JAVA_HOME/bin 
 export CODE_PATH="~/Documents/code/"
 export CC=gcc-4.2
@@ -190,6 +238,32 @@ export PATH=$PATH:$EC2_HOME/bin
 export AWS_AUTO_SCALING_HOME="/Users/mwest/paas-source/autoscaling_cli"
 export PATH=$PATH:$AWS_AUTO_SCALING_HOME/bin 
 export PATH=$PATH:/System/Library/dsc-cassandra/bin:~/paas-source/apache-apps/kafka-0.05/bin
-export PATH=$PATH:/Applications/Postgres93.app/Contents/MacOS/bin
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 export PATH=$PATH:/Users/mwest/paas-source/apache-storm-0.9.1-incubating/bin
 export GATLING_HOME=/Users/mwest/paas-source/gatling-2.0.0-M3a
+
+export CC=/usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2
+export CXX=/usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/g++-4.2
+export CPP=/usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/cpp-4.2
+
+# Kafka
+export KAFKA_HOME=/usr/local/kafka_install/kafka-0.7.1
+export KAFKA=$KAFKA_HOME/bin
+export KAFKA_CONFIG=$KAFKA_HOME/config
+
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=/Users/mwest/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+
+export CLOJURESCRIPT_HOME="~/paas-source/clojurescript"
+
+#source ~/perl5/perlbrew/etc/bashrc
+
+export GOPATH=~/paas-source/golang
+export PATH="/usr/local/bin:/usr/local/sbin":$PATH
+export PATH="$CLOJURESCRIPT_HOME/bin:$PATH"
+export PATH=$PATH:$GOPATH/bin
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
