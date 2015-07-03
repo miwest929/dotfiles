@@ -1,5 +1,12 @@
 require 'irb/completion'
 require 'time'
+#require 'wirble'
+
+# load wirble
+Wirble.init
+Wirble.colorize
+
+IRB.conf[:AUTO_INDENT] = true
 
 Thread.current[:user_id] = -1
 
@@ -21,6 +28,12 @@ class Object
     (self.methods - Object.instance_methods).sort
   end
 end
+
+Kernel.at_exit {
+  File.open("irb.log", "w") do |f|
+    f << Readline::HISTORY.to_a.join("\n")
+  end
+}
 
 =begin
 >> a.each_with_index.map {|i, index| "#{i}:#{index}"}

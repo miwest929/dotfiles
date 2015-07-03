@@ -1,12 +1,18 @@
 # For future reference. In case I ever need to start from square one. Here is a list of my brew taps
 #~/paas-source [master] $ brew list
-#apple-gcc42   erlang      imagemagick   libmpc08    node      readline    tmux      zookeeper
-#autoconf    freetype    isl011      libpng      nspr      redis     tree
-#automake    gcc48     jpeg      libtool     openssl     rethinkdb   unixodbc
-#boot2docker   git     leiningen   libyaml     ossp-uuid   sbt     v8
-#cloog018    gmp4      libevent    mercurial   pcre      scala     wget
-#couchdb     gsl     libgpg-error    mpfr2     pig     spidermonkey    wxmac
-#docker      icu4c     libksba     mysql     pkg-config    the_silver_searcher xz
+#apple-gcc42   htop-osx    mercurial   sbt
+#autoconf    icu4c     mpfr2     scala
+#automake    imagemagick   mysql     spidermonkey
+#cloog018    isl011      node      the_silver_searcher
+#codeclimate   jpeg      nspr      tmux
+#couchdb     leiningen   openssl     tree
+#docker      libevent    ossp-uuid   unixodbc
+#erlang      libgpg-error    pcre      v8
+#freetype    libksba     pig     wget
+#gcc48     libmpc08    pkg-config    wxmac
+#git     libpng      readline    xz
+#gmp4      libtool     redis     zookeeper
+#gsl     libyaml     rethinkdb
 
 
 function gvim { /Applications/MacVim.app/Contents/MacOS/Vim -g $*; }
@@ -17,6 +23,8 @@ PS1="\[\e[1;34m\]\w\[\e[m\]\[\e[1;36m\] [\$(git branch 2>/dev/null | sed -n '/^\
 # pg_dump -h dalton-sandbox-7e06d098.cz4lsbnwubdn.us-east-1.rds.amazonaws.com -U daltonc907ab3b Dalton_sandbox | psql dalton_sandbox
 
 #cd /mnt/blueprint/current && source 12factor-env.sh && bundle exec ./script/rails c
+alias weight='du -h --max-depth=1'
+alias rubysrc='find . -name \*.rb'
 alias ls='ls -G' # colorize the output
 alias g++='g++-4.8'
 alias fakeftp='python -m SimpleHTTPServer'
@@ -219,9 +227,10 @@ unset MAILCHECK
 
 export HADOOP_MAPRED_HOME=/Users/mwest/paas-source/hadoop-2.3.0
 export YARN_CONF_DIR=/Users/mwest/paas-source/hadoop-2.3.0
+export NEO4J_HOME=/Users/mwest/neo4j
 
 export AWS_ACCESS_KEY_ID="AKIAIVSWJ62JWKWBPREA"
-export AWS_SECRET_KEY="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"
+export AWS_SECRET_ACCESS_KEY="36odOI7BEn7y588rKLMB7qEu321lqdHz4G3O1C5S"
 export AWS_CREDENTIAL_FILE="/Users/mwest/paas-source/creds/credential-file-path.green"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home"
 export PATH=$PATH:$JAVA_HOME/bin 
@@ -240,6 +249,7 @@ export PATH=$PATH:$AWS_AUTO_SCALING_HOME/bin
 export PATH=$PATH:/System/Library/dsc-cassandra/bin:~/paas-source/apache-apps/kafka-0.05/bin
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 export PATH=$PATH:/Users/mwest/paas-source/apache-storm-0.9.1-incubating/bin
+export PATH=$PATH:$NEO4J_HOME/bin
 export GATLING_HOME=/Users/mwest/paas-source/gatling-2.0.0-M3a
 
 export CC=/usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2
