@@ -20,9 +20,9 @@ function gvim { /Applications/MacVim.app/Contents/MacOS/Vim -g $*; }
 PS1="\[\e[1;34m\]\w\[\e[m\]\[\e[1;36m\] [\$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')]\[\e[0m\] $ "
 
 # Example pg_dump command
-# pg_dump -h dalton-sandbox-7e06d098.cz4lsbnwubdn.us-east-1.rds.amazonaws.com -U daltonc907ab3b Dalton_sandbox | psql dalton_sandbox
+# pg_dump -h <host> -U <user> <database> | psql dalton_sandbox
 
-#cd /mnt/blueprint/current && source 12factor-env.sh && bundle exec ./script/rails c
+alias top="top -o cpu" # make CPU% the default sort field
 alias weight='du -h --max-depth=1'
 alias rubysrc='find . -name \*.rb'
 alias ls='ls -G' # colorize the output
@@ -229,8 +229,7 @@ export HADOOP_MAPRED_HOME=/Users/mwest/paas-source/hadoop-2.3.0
 export YARN_CONF_DIR=/Users/mwest/paas-source/hadoop-2.3.0
 export NEO4J_HOME=/Users/mwest/neo4j
 
-export AWS_ACCESS_KEY_ID="AKIAIVSWJ62JWKWBPREA"
-export AWS_SECRET_ACCESS_KEY="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"
+export AWS_DEFAULT_REGION="us-east-1"
 export AWS_CREDENTIAL_FILE="/Users/mwest/paas-source/creds/credential-file-path.green"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home"
 export PATH=$PATH:$JAVA_HOME/bin 
