@@ -14,14 +14,17 @@
 #gmp4      libtool     redis     zookeeper
 #gsl     libyaml     rethinkdb
 
-
 function gvim { /Applications/MacVim.app/Contents/MacOS/Vim -g $*; }
 
 PS1="\[\e[1;34m\]\w\[\e[m\]\[\e[1;36m\] [\$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')]\[\e[0m\] $ "
 
+alias node-exporter='./node_exporter -collectors.enabled="mdadm,time"'
+
 # Example pg_dump command
 # pg_dump -h <host> -U <user> <database> | psql dalton_sandbox
 
+alias be='bundle exec'
+alias lsdir='ls -d */'
 alias top="top -o cpu" # make CPU% the default sort field
 alias weight='du -h --max-depth=1'
 alias rubysrc='find . -name \*.rb'
@@ -225,12 +228,16 @@ fi
 # Get rid of the annoying 'You have new mail in /var/mail' message
 unset MAILCHECK
 
-export HADOOP_MAPRED_HOME=/Users/mwest/paas-source/hadoop-2.3.0
-export YARN_CONF_DIR=/Users/mwest/paas-source/hadoop-2.3.0
+#export HADOOP_MAPRED_HOME=/Users/mwest/paas-source/hadoop-2.3.0
+#export YARN_CONF_DIR=/Users/mwest/paas-source/hadoop-2.3.0
 export NEO4J_HOME=/Users/mwest/neo4j
 
-export AWS_DEFAULT_REGION="us-east-1"
-export AWS_CREDENTIAL_FILE="/Users/mwest/paas-source/creds/credential-file-path.green"
+# Set the AWS configuration (includes account credentials) as environment variables. Format of file:
+#  export AWS_ACCESS_KEY_ID=".."
+#  export AWS_SECRET_KEY="..."
+# Make sure the file has execute permissions
+source aws-keys.sh
+
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home"
 export PATH=$PATH:$JAVA_HOME/bin 
 export CODE_PATH="~/Documents/code/"
@@ -265,8 +272,6 @@ export DOCKER_CERT_PATH=/Users/mwest/.boot2docker/certs/boot2docker-vm
 export DOCKER_TLS_VERIFY=1
 
 export CLOJURESCRIPT_HOME="~/paas-source/clojurescript"
-
-#source ~/perl5/perlbrew/etc/bashrc
 
 export GOPATH=~/paas-source/golang
 export PATH="/usr/local/bin:/usr/local/sbin":$PATH
