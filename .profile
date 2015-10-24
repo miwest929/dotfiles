@@ -66,6 +66,8 @@ alias gemsetdir='rvm gemset dir'
 alias redisping='redis-cli ping'
 alias diffstash='git stash show -p stash@{0}'
 
+alias javahome='/usr/libexec/java_home'
+
 # cd /mnt/jenkins/jobs/
 alias jenkins='ssh tps-sqa-jenkins.imedidata.net'
 
@@ -236,7 +238,7 @@ export NEO4J_HOME=/Users/mwest/neo4j
 #  export AWS_ACCESS_KEY_ID=".."
 #  export AWS_SECRET_KEY="..."
 # Make sure the file has execute permissions
-source aws-keys.sh
+source /Users/mwest/aws-keys.sh
 
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home"
 export PATH=$PATH:$JAVA_HOME/bin 
