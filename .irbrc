@@ -1,17 +1,21 @@
+require 'rubygems'
 require 'irb/completion'
 require 'time'
 #require 'wirble'
 
 # load wirble
-Wirble.init
-Wirble.colorize
+#Wirble.init
+#Wirble.colorize
 
-IRB.conf[:AUTO_INDENT] = true
+USER_URI = "com:mdsol:users:002a93e0-e9e9-4879-be8a-350e37a2bc1e"
+Thread.current[:current_user_uri] = USER_URI
+
+#IRB.conf[:AUTO_INDENT] = true
 
 Thread.current[:user_id] = -1
 
-IRB.conf[:PROMPT_MODE] = :SIMPLE
-IRB.conf[:SAVE_HISTORY] = 1000
+#IRB.conf[:PROMPT_MODE] = :SIMPLE
+#IRB.conf[:SAVE_HISTORY] = 1000
 
 def j(obj)
   puts obj.to_json

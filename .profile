@@ -37,7 +37,7 @@ alias mc="cd ~/paas-source/maudit_client"
 alias supervisor='supervisorctl'
 alias fixbundler='gem update --system && gem install bundler'
 alias innodb='PGPASSWORD=Hp2198hcv psql -U mwest -h maudit-innovate-5f84a522.cbkymcm2irfk.us-east-1.rds.amazonaws.com maudit_innovate'
-alias pg='postgres -D /usr/local/var/postgres'
+alias pg='postgres -D /usr/local/var/postgres-4.1'
 alias diskbench='time dd if=/dev/zero of=dummy_file bs=512k count=200'
 alias words='/usr/share/dict/words'
 alias strace='dtruss'
@@ -100,6 +100,16 @@ alias code='cd $CODE_PATH'
 alias githist="history | grep \"  git \" | awk '{print $1 \" \" $3}' | grep -v '|' > history.txt"
 
 alias idistro='innotop -u imedidataa1192a -p9504b2d048593e2e1ca46c2e6cf60217 -h imedidata-distro-46256681.cz4lsbnwubdn.us-east-1.rds.amazonaws.com'
+
+function sbtinit() {
+  mkdir -p src/{main,test}/{java,resources,scala}
+  mkdir lib project target
+
+  # create an initial build.sbt file
+  echo 'name := "MyProject"
+        version := "1.0"
+        scalaVersion := "2.10.0"' > build.sbt
+}
 
 function dockerclean() {
   docker ps -a | grep "Exited" | awk '{print $1}' | xargs docker rm
