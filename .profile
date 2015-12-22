@@ -22,7 +22,8 @@ alias node-exporter='./node_exporter -collectors.enabled="mdadm,time"'
 
 # Example pg_dump command
 # pg_dump -h <host> -U <user> <database> | psql dalton_sandbox
-
+alias shopton='shopt | grep on | grep -v off'
+alias shoptoff='shopt | grep off | grep -v on'
 alias be='bundle exec'
 alias lsdir='ls -d */'
 alias top="top -o cpu" # make CPU% the default sort field
