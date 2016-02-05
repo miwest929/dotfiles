@@ -23,6 +23,17 @@ alias node-exporter='./node_exporter -collectors.enabled="mdadm,time"'
 # Example pg_dump command
 # pg_dump -h <host> -U <user> <database> | psql dalton_sandbox
 
+# mvn quick commands
+alias mvnshow='mvn dependency:tree | grep $1'
+alias mvnbuild='mvn clean compile install -DskipTests -DAPPLICATION=prime -DENVIRONMENT=sandbox'
+alias mvnrebuild='mvn dependency:purge-local-repository -DactTransitively=false -DreResolve=false && mvn clean compile install -DskipTests -DAPPLICATION=prime -DENVIRONMENT=sandbox'
+alias pomupdate='mvn eclipse:clean && mvn eclipse:eclipse'
+
+alias wdsize='du -h .'
+alias lsdirs='ls -d */'
+alias eclipseit='mvn eclipse:eclipse'
+alias shopton='shopt | grep on | grep -v off'
+alias shoptoff='shopt | grep off | grep -v on'
 alias be='bundle exec'
 alias lsdir='ls -d */'
 alias top="top -o cpu" # make CPU% the default sort field
@@ -248,8 +259,10 @@ export NEO4J_HOME=/Users/mwest/neo4j
 #  export AWS_ACCESS_KEY_ID=".."
 #  export AWS_SECRET_KEY="..."
 # Make sure the file has execute permissions
-source /Users/mwest/aws-keys.sh
+#source /Users/mwest/aws-keys.sh
 
+export LSCOLORS='gxBxhxDxfxhxhxhxhxcxcx'
+export JAVA_ORACLE_HOME="/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home"
 export PATH=$PATH:$JAVA_HOME/bin 
 export CODE_PATH="~/Documents/code/"
@@ -268,6 +281,7 @@ export PATH=$PATH:/System/Library/dsc-cassandra/bin:~/paas-source/apache-apps/ka
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
 export PATH=$PATH:/Users/mwest/paas-source/apache-storm-0.9.1-incubating/bin
 export PATH=$PATH:$NEO4J_HOME/bin
+export PATH=$PATH:~/paas-source/activator/activator
 export GATLING_HOME=/Users/mwest/paas-source/gatling-2.0.0-M3a
 
 export CC=/usr/local/Cellar/apple-gcc42/4.2.1-5666.3/bin/gcc-4.2
@@ -279,9 +293,10 @@ export KAFKA_HOME=/usr/local/kafka_install/kafka-0.7.1
 export KAFKA=$KAFKA_HOME/bin
 export KAFKA_CONFIG=$KAFKA_HOME/config
 
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/mwest/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.100:2376"
+export DOCKER_CERT_PATH="/Users/mwest/.docker/machine/machines/default"
+export DOCKER_MACHINE_NAME="default"
 
 export CLOJURESCRIPT_HOME="~/paas-source/clojurescript"
 
@@ -291,5 +306,12 @@ export PATH="$CLOJURESCRIPT_HOME/bin:$PATH"
 export PATH=$PATH:$GOPATH/bin
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export PRIME_WF_TASKLIST=prime_sandbox_MW
+
+# Command for checking if given AWS credentials is valid or not
+# ACCESS_KEY_ID=<enter-access-key> SECRET_ACCESS_KEY=<enter-secret-access-key> ~/paas-source/scripts/check-aws-credentials
+
+# Set the maven env, app, user
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
