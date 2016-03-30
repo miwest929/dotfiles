@@ -1,9 +1,14 @@
+" See http://stackoverflow.com/questions/2078271/get-current-value-of-a-setting-in-vim
+" View the value of a particular vim setting => :set <setting>?
 call pathogen#runtime_append_all_bundles()
 
 let g:go_fmt_fail_silently = 1
 let g:numbers_exclude = ['tagbar', 'gundo', 'minibufexpl', 'nerdtree']
 let g:rspec_runner = "os_x_iterm"
 
+"See http://vim.wikia.com/wiki/File_format
+"Vim will detect the fileformat of a file when its opened. If it detects DOS-style line endings then Vim will set fileformat=dos for that file.
+set fileformat=unix
 set rtp+=$GOROOT/misc/vim
 
 syntax enable

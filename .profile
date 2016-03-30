@@ -23,6 +23,8 @@ alias node-exporter='./node_exporter -collectors.enabled="mdadm,time"'
 # Example pg_dump command
 # pg_dump -h <host> -U <user> <database> | psql dalton_sandbox
 
+alias rmgitfiles='git ls-files --deleted -z'
+
 # mvn quick commands
 alias mvnshow='mvn dependency:tree | grep $1'
 alias mvnbuild='mvn clean compile install -DskipTests -DAPPLICATION=prime -DENVIRONMENT=sandbox'
@@ -111,6 +113,23 @@ alias code='cd $CODE_PATH'
 alias githist="history | grep \"  git \" | awk '{print $1 \" \" $3}' | grep -v '|' > history.txt"
 
 alias idistro='innotop -u imedidataa1192a -p9504b2d048593e2e1ca46c2e6cf60217 -h imedidata-distro-46256681.cz4lsbnwubdn.us-east-1.rds.amazonaws.com'
+
+# http://www.tecmint.com/explain-shell-commands-in-the-linux-shell/
+# explain.sh begins
+function explain () {
+  if [ "$#" -eq 0 ]; then
+    while read  -p "Command: " cmd; do
+      curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$cmd"
+    done
+    echo "Bye!"
+  elif [ "$#" -eq 1 ]; then
+    curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$1"
+  else
+    echo "Usage"
+    echo "explain                  interactive mode."
+    echo "explain 'cmd -o | ...'   one quoted command to explain it."
+  fi
+}
 
 function sbtinit() {
   mkdir -p src/{main,test}/{java,resources,scala}
@@ -308,6 +327,8 @@ export PATH=$PATH:$GOPATH/bin
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PRIME_WF_TASKLIST=prime_sandbox_MW
+
+export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 
 # Command for checking if given AWS credentials is valid or not
 # ACCESS_KEY_ID=<enter-access-key> SECRET_ACCESS_KEY=<enter-secret-access-key> ~/paas-source/scripts/check-aws-credentials
