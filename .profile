@@ -330,6 +330,11 @@ export PRIME_WF_TASKLIST=prime_sandbox_MW
 
 export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 
+# If receiving persistent nokogiri installation errors then following env vars will correct it
+export CPPFLAGS="-I/usr/local/opt/libxml2/include"
+export LDFLAGS="-L/usr/local/opt/libxml2/lib"
+#CC=llvm-gcc bundle install
+
 # Command for checking if given AWS credentials is valid or not
 # ACCESS_KEY_ID=<enter-access-key> SECRET_ACCESS_KEY=<enter-secret-access-key> ~/paas-source/scripts/check-aws-credentials
 
