@@ -331,6 +331,7 @@ export PRIME_WF_TASKLIST=prime_sandbox_MW
 export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 
 # If receiving persistent nokogiri installation errors then following env vars will correct it
+# https://github.com/sparklemotion/nokogiri/wiki/What-to-do-if-libxml2-is-being-a-jerk
 export CPPFLAGS="-I/usr/local/opt/libxml2/include"
 export LDFLAGS="-L/usr/local/opt/libxml2/lib"
 #CC=llvm-gcc bundle install
